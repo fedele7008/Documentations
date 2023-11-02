@@ -8,7 +8,7 @@ Finally, we can fork the repository, and create pull request from changes made i
 
 Note that we are using `main` branch as primary branch. Some may use `master`, `develop`, etc. instead.
 
-## Forkor
+## Fork
 
 1. Goto Github repository you want to work on and Fork the repo by clicking on the `Fork` button. Now you should have the new forked repository under your account.
 1. Clone the **forked repository** into your local machine.

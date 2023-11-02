@@ -1,182 +1,236 @@
 # How to contribute to Github project
 
-You may make changes in main branch and push right away but this is not recommended and should be avoided when you are working with other people.
+## Contents
 
-You may also create a new branch in the repo make changes there and then create the pull request for that branch. This is a good practice but you may have to configure some privilege issues in the Github repo for pushing branches to remote.
+* [Introduction](#introduction)
+* [Fork Repository](#fork-repository)
+* [Creating a new working branch](#creating-a-new-working-branch)
+* [Submitting from the working branch](#submitting-code-from-the-working-branch)
+* [Update the Codebase while working on the working branch](#update-the-codebase-while-working-on-the-working-branch)
+* [Create pull request](#creating-pull-request)
+* [Synchronizing repository after pull request get merged](#synchronizing-repository-after-pull-request-get-merged)
+* [Example](#example)
 
-Finally, we can fork the repository, and create pull request from changes made in that forked repository. This is a highly recommended practice for collaboration.
+## Introduction
 
-Note that we are using `main` branch as primary branch. Some may use `master`, `develop`, etc. instead.
+There are various ways to contribute to Github projects.
 
-## Fork
+* You may clone the repository, make changes, and push directly to the main branch.
+
+    But if you are working with other people, this is not recommended and should be avoided.
+
+* You may also create a new branch in the repo make changes there and then create the pull request for that branch.
+
+    This is a good practice but you may have to configure some privilege issues in the Github repo for pushing branches to remote. (Especially if you are contributing to some open source project)
+
+* Finally, we can fork the repository, and create pull request from changes made in that forked repository. This is a highly recommended practice for collaboration. (In open source project, this is must)
+
+Note that the naming of primary branch may vary depending on the project.
+The traditional naming convention was `master` however, people tends to use `main` instead as the "master" resembles the slavery.
+
+Some may use completely different naming conventions like `develop`, `core`, etc.
+
+In this documentation, we are going to learn the third approach using fork.
+
+## Fork repository
 
 1. Goto Github repository you want to work on and Fork the repo by clicking on the `Fork` button. Now you should have the new forked repository under your account.
+
+    ![git-fork.png](../assets/git/img/git-fork.png)
+
 1. Clone the **forked repository** into your local machine.
 
     ```git
-    # Clone the forked repository into your local machine
     git clone ≪Forked Repository≫
     ```
 
-    * You can run `git remote -v` to check remote repositories for current repository. The `origin` should be reserved for currently **forked repository**.
+    * You can run `git remote -v` to check remote repositories for current repository.
+
+        The `origin` should be reserved for currently **forked repository**.
+
 1. Setup the upstream for the forked repository.
 
     ```git
-    # register upstream repository
     # git remote add ≪alias≫ ≪Upstream Repository≫
-    git remote add upstream ≪Upstream Repository≫
     ```
 
-    * The `≪alias≫` is typically named "upstream".
+    * The `≪alias≫` is typically named "upstream". We will use `upstream` as our upstream repository alias in this document.
 
 ## Creating a new working branch
 
-1. Before creating a new working branch in the forked repository, you should update the **main** branch up to date. You can do this by running the following:
+1. Goto the root folder where you cloned the **forked repository** in your terminal.
+
+1. Check out to primary branch that you are going to start from.
 
     ```git
-    # Move to main branch
-    git checkout main
+    git checkout ≪Primary Branch≫
+    ```
 
-    # Fetch changes from upstream
+1. Fetch any updates from upstream repository.
+
+    ```git
     git fetch upstream
-
-    # Pull updates from upstream repository
-    # git pull --rebase ≪Upstream Remote≫ main
-    git pull --rebase upstream main
-
-    # Push the changes from upstream repository to our forked repository
-    # git push ≪Forked Remote≫ main
-    git push origin main
     ```
 
-1. Then, you may create a new working branch
+1. Rebase primary branch up-to-date.
 
     ```git
-    # Create a new working branch and checkout to it
-    git checkout -b ≪Name of the Working Branch≫
+    git rebase upstream/≪Primary Branch≫
     ```
 
-    * You can check the branches on **local machine** using `git branch`
-    * You can check all branches on both **local** and **remote** machine using `git branch -a`
-    * If you want to remove some branch from the **local machine**, use `git branch -d ≪Branch name≫`
-    * If you want to force-delete some branch from the **local machine**, use `git branch -D ≪Branch name≫`
-    * If you want to remove some branch from the **remote repository**, use `git push ≪Remote≫ --delete ≪Branch name≫`
-    * If you removed some branch from the **remote repository** and want to update that fact to local machine, use `git fetch --prune`. You still have to run `git branch -D ≪Branch name≫` to remove the branch completely from the local machine too.
+1. Push the up-to-date branch to remote repository.
+
+    ```git
+    git push origin ≪Primary Branch≫
+    ```
+
+1. Create a new working branch
+
+    ```git
+    git checkout -b ≪Working Branch≫
+    ```
+
+* You can check the branches on **local machine** using `git branch`
+* You can check all branches on both **local** and **remote** machine using `git branch -a`
+* If you want to remove some branch from the **local machine**, use `git branch -d ≪Branch Name≫`
+* If you want to force-delete some branch from the **local machine**, use `git branch -D ≪Branch Name≫`
+* If you want to remove some branch from the **remote repository**, use `git push ≪Remote≫ --delete ≪Branch Name≫`
+* If you removed some branch from the **remote repository** and want to update that fact to local machine, use `git fetch --prune`.
+
+    You still have to run `git branch -D ≪Branch Name≫` to remove the branch completely from the local machine too.
 
 ## Submitting code from the working branch
 
-1. After writing code from the working branch, add the files with changes
+1. After writing code on your working branch, add the files with changes to commit list.
 
     ```git
-    # Add changed files to git watch list
-    # git add ≪File names≫
-    git add *
+    git add ≪File names≫
     ```
 
-    * `*` implies all files that has been changed, this excludes the files that are enlisted in `.gitignore` file
+    * `*` or `.` for the `≪File names≫` implies all files that has been changed will be added.
+
+        This excludes the files that are enlisted in `.gitignore` file
 
 1. Commit the work
 
     ```git
-    # Commit changes
     git commit
     ```
 
-    * You will be seeing some file editor after `git commit`, write some commit messages and "save & exit" the file editor to finish the commit. If you "discard changes & quit", the commit will be discarded.
-        * If you use `vim` editor, `:wq` to "save & exit", or use `:q!` to "discard changes & quit".
-    * You can also use `git commit -m ≪Commit message≫` to write simple commit message. (Only recommended for small changes)
+    * You will be seeing some file editor after `git commit`, write some commit messages and **save & exit** the file editor to finish the commit. If you **discard changes & quit**, the commit will be discarded.
+        * If you use `vim` editor, `:wq` to **save & exit**, or use `:q!` to **discard changes & quit**.
+
+    * You can also use `git commit -m ≪Some commit message≫` to write simple commit message. (Only recommended for small changes)
 
 1. Push all local commits to remote repository
 
     ```git
-    # Push to remote repository
-    # git push ≪Forked Remote≫ ≪Name of Working Branch≫
-    git push origin ≪Name of Working Branch≫
+    git push origin ≪Working Branch≫
     ```
 
 ## Update the codebase while working on the working branch
 
-Sometimes, you may want to update the codebase while working on the working branch, then you can do the following steps
+Sometimes, you may want to update the codebase while working on the working branch.
 
-```git
-# Fetch changes from upstream
-# git fetch ≪Upstream Remote≫
-git fetch upstream
+1. Fetch changes from upstream repository
 
-# Move to primary branch
-git checkout main
+    ```git
+    git fetch upstream
+    ```
 
-# Pull updates from upstream
-# git pull --rebase ≪Upstream Remote≫ main
-git pull --rebase upstream main
+1. Goto primary branch
 
-# Push the changes to forked repository
-# git push ≪Forked Remote≫ main
-git push origin main
+    ```git
+    git checkout ≪Primary Branch≫
+    ```
 
-# Move to working branch
-git checkout ≪Name of Working Branch≫
+1. Rebase primary branch up-to-date.
 
-# Pull updates from forked repository's primary branch
-# git pull ≪Forked Remote≫ main
-# Notice that we are not using --rebase flag here
-git pull origin main
+    ```git
+    git rebase upstream/≪Primary Branch≫
+    ```
 
-# Pull updates from forked repository's working branch
-# git pull ≪Forked Remote≫ ≪Name of Working Branch≫
-git pull origin ≪Name of Working Branch≫
+1. Push changes to remote repository
 
-# Push the changes from upstream repository to our forked repository
-# git push ≪Forked Remote≫ ≪Name of Working Branch≫
-git push origin ≪Name of Working Branch≫
-```
+    ```git
+    git push origin ≪Primary Branch≫
+    ```
+
+1. Goto working branch
+
+    ```git
+    git checkout ≪Working Branch≫
+    ```
+
+1. Rebase working branch up-to-date.
+
+    ```git
+    git rebase ≪Primary Branch≫
+    ```
+
+1. Pull updates from other contributors push on the working branch
+
+    ```git
+    git pull origin ≪Working Branch≫
+    ```
+
+1. Push the changes to remote repository
+
+    ```git
+    git push origin ≪Working Branch≫
+    ```
 
 ## Creating Pull Request
 
-Go to the forked repository and select your working branch and press `Open pull request` button you may see from `Contribute` dropdown.
+1. Goto your forked repository from Github.
 
-Ensure that your **Working branch of Forked Repository** is getting merged into **Primary branch of Upstream Repository**.
+1. Select your **working branch** and click on **Contribute** button.
 
-Use appropriate title for the pull request, describe about the issue and leave the log of what this pull request is about.
+    ![git-pr-1.png](../assets/git/img/git-pr-1.png)
 
-Then press `Create pull request` button.
+1. Click **Open pull request** button, describe about the issue and leave comments about your pull request.
+
+1. Press **Create pull request** button.
 
 ## Synchronizing repository after pull request get merged
 
 After your pull request has been merged, you have to update your forked repository to apply the changes to made.
 
-```git
-# Move to main branch
-git checkout main
+1. Fetch changes from upstream repository
 
-# Fetch changes from upstream
-git fetch upstream
+    ```git
+    git fetch upstream
+    ```
 
-# Pull updates from upstream repository
-# git pull --rebase ≪Upstream remote≫ main
-git pull --rebase upstream main
+1. Goto primary branch
 
-# Push the changes from upstream repository to our forked repository
-# git push ≪Forked remote≫ main
-git push origin main
+    ```git
+    git checkout ≪Primary Branch≫
+    ```
 
-# Remove local working branch
-git branch -D ≪Name of Working Branch≫
-```
+1. Rebase primary branch up-to-date.
 
-Then you may delete working branch from Github website fetch with prune option to update your local repository too.
+    ```git
+    git rebase upstream/≪Primary Branch≫
+    ```
 
-```git
-# fetch the fact that you deleted the working branch
-git fetch --prune
-```
+1. Push the changes to upstream repository
 
-Or if you want to delete the working branch in remote repository from local, run the following command
+    ```git
+    git push origin ≪Primary Branch≫
+    ```
 
-```git
-# remove the working branch from forked repository
-git push origin --delete ≪Name of Working Branch≫
-```
+1. Remove local working branch
+
+    ```git
+    git branch -D ≪Working Branch≫
+    ```
+
+1. Remove the working branch from forked repository
+
+    ```git
+    git push origin --delete ≪Working Branch≫
+    ```
 
 ## Example
 
@@ -196,24 +250,31 @@ Assume that your upstream repository use **master** branch as primary branch (as
     git remote add upstream ≪Upstream Repository≫
     ```
 
+1. Update codebase if your master branch is outdated
+
+    ```git
+    git fetch upstream
+    git checkout master
+    git rebase upstream/master
+    git push origin master
+    ```
+
 1. Create your working branch
 
     ```git
     git checkout -b some-issue
     ```
 
-1. Update your codebase from upstream
+1. Update your codebase from upstream (if necessary)
 
     ```git
     git fetch upstream
     git checkout master
-    git pull --rebase upstream master
+    git rebase upstream/master
     git push origin master
     git checkout some-issue
-    git pull origin master # This automatically create muerge loop
-    git rebase master some-issue # This will rebase the merge loop
-    git pull origin some-issue # Pull any other updates made on working branch from some other contributer
-    # Fix any conflicts
+    git rebase master
+    git pull origin some-issue
     git push origin some-issue
     ```
 
@@ -221,25 +282,27 @@ Assume that your upstream repository use **master** branch as primary branch (as
 
     ```git
     git add *
-    git commit -m "Some commit message"
+    git commit -m "≪Some commit message≫"
     git push origin some-issue
     ```
 
-    and create Pull Request if you haven't already, from your **forked some-issue** branch to **upstream master** branch.
+    and create Pull Request if you haven't already.
 
-1. Repeat from step 4 if you had not updated your codebase **today**.
+    Your pull request should be from your **forked some-issue** branch to **upstream master** branch.
 
-    If you already have updated your codebase, repeat from 5 until you are completely ready.
+1. Repeat from step **5** until your work is done.
+
+    Updating code once a while is recommended.
 
 1. After Your pull request has been approved and merged, delete the working branch and update your forked repository's master branch
 
     ```git
-    git checkout master
     git fetch upstream
-    git pull --rebase upstream master
+    git checkout master
+    git rebase upstream/master
     git push origin master
     git branch -D some-issue
     git push origin --delete some-issue
     ```
 
-1. Repeat from step 3 if you get assigned to another issue
+1. Repeat from step **3** if you get assigned to another issue

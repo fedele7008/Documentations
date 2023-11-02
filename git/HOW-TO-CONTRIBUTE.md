@@ -41,11 +41,11 @@ Note that we are using `main` branch as primary branch. Some may use `master`, `
     git fetch upstream
 
     # Pull updates from upstream repository
-    # git pull --rebase ≪Upstream remote≫ main
+    # git pull --rebase ≪Upstream Remote≫ main
     git pull --rebase upstream main
 
     # Push the changes from upstream repository to our forked repository
-    # git push ≪Forked remote≫ main
+    # git push ≪Forked Remote≫ main
     git push origin main
     ```
 
@@ -90,7 +90,7 @@ Note that we are using `main` branch as primary branch. Some may use `master`, `
 
     ```git
     # Push to remote repository
-    # git push ≪Forked Repository≫ ≪Name of Working Branch≫
+    # git push ≪Forked Remote≫ ≪Name of Working Branch≫
     git push origin ≪Name of Working Branch≫
     ```
 
@@ -99,18 +99,31 @@ Note that we are using `main` branch as primary branch. Some may use `master`, `
 Sometimes, you may want to update the codebase while working on the working branch, then you can do the following steps
 
 ```git
+# Fetch changes from upstream
+# git fetch ≪Upstream Remote≫
+git fetch upstream
+
+# Move to primary branch
+git checkout main
+
+# Pull updates from upstream
+# git pull --rebase ≪Upstream Remote≫ main
+git pull --rebase upstream main
+
+# Push the changes to forked repository
+# git push ≪Forked Remote≫ main
+git push origin main
+
 # Move to working branch
 git checkout ≪Name of Working Branch≫
 
-# Fetch changes from upstream
-git fetch upstream
-
-# Pull updates from upstream repository
-# git pull --rebase ≪Upstream remote≫ main
-git pull --rebase upstream main
+# Pull updates from forked repository's primary branch
+# git pull ≪Forked Remote≫ main
+# Notice that we are not using --rebase flag here
+git pull origin main
 
 # Push the changes from upstream repository to our forked repository
-# git push ≪Forked remote≫ ≪Name of Working Branch≫
+# git push ≪Forked Remote≫ ≪Name of Working Branch≫
 git push origin ≪Name of Working Branch≫
 ```
 
@@ -188,9 +201,12 @@ Assume that your upstream repository use **master** branch as primary branch (as
 1. Update your codebase from upstream
 
     ```git
-    git checkout some-issue
     git fetch upstream
+    git checkout master
     git pull --rebase upstream master
+    git push origin master
+    git checkout some-issue
+    git pull origin master
     # Fix any conflicts
     git push origin some-issue
     ```

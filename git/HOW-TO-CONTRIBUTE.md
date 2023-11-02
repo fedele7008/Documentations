@@ -122,6 +122,10 @@ git checkout ≪Name of Working Branch≫
 # Notice that we are not using --rebase flag here
 git pull origin main
 
+# Pull updates from forked repository's working branch
+# git pull ≪Forked Remote≫ ≪Name of Working Branch≫
+git pull origin ≪Name of Working Branch≫
+
 # Push the changes from upstream repository to our forked repository
 # git push ≪Forked Remote≫ ≪Name of Working Branch≫
 git push origin ≪Name of Working Branch≫
@@ -207,6 +211,7 @@ Assume that your upstream repository use **master** branch as primary branch (as
     git push origin master
     git checkout some-issue
     git pull origin master
+    git pull origin some-issue
     # Fix any conflicts
     git push origin some-issue
     ```

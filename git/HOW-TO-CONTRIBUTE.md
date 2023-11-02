@@ -2,13 +2,13 @@
 
 You may make changes in main branch and push right away but this is not recommended and should be avoided when you are working with other people.
 
-You may also create a new branch in the repo and make changes there and create the pull request of that branch. This is a good practice to do but may have to configure some privilege issue in the Github repo for pushing branches to remote.
+You may also create a new branch in the repo make changes there and then create the pull request for that branch. This is a good practice but you may have to configure some privilege issues in the Github repo for pushing branches to remote.
 
-Finally, we can fork the repository, and create pull request of changes made in that forked repository. This is highly recommended practice for collaboration.
+Finally, we can fork the repository, and create pull request from changes made in that forked repository. This is a highly recommended practice for collaboration.
 
 Note that we are using `main` branch as primary branch. Some may use `master`, `develop`, etc. instead.
 
-## Fork
+## Forkor
 
 1. Goto Github repository you want to work on and Fork the repo by clicking on the `Fork` button. Now you should have the new forked repository under your account.
 1. Clone the **forked repository** into your local machine.
@@ -133,7 +133,7 @@ git push origin ≪Name of Working Branch≫
 
 ## Creating Pull Request
 
-Goto the forked repository and select your working branch and press `Open pull request` button you may see from `Contribute` dropdown.
+Go to the forked repository and select your working branch and press `Open pull request` button you may see from `Contribute` dropdown.
 
 Ensure that your **Working branch of Forked Repository** is getting merged into **Primary branch of Upstream Repository**.
 

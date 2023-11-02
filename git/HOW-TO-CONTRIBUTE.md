@@ -210,8 +210,9 @@ Assume that your upstream repository use **master** branch as primary branch (as
     git pull --rebase upstream master
     git push origin master
     git checkout some-issue
-    git pull origin master
-    git pull origin some-issue
+    git pull origin master # This automatically create muerge loop
+    git rebase master some-issue # This will rebase the merge loop
+    git pull origin some-issue # Pull any other updates made on working branch from some other contributer
     # Fix any conflicts
     git push origin some-issue
     ```

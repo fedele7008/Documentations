@@ -1,5 +1,18 @@
 # How to contribute to Github project
 
+## Contents
+
+* [Introduction](#introduction)
+* [Fork Repository](#fork-repository)
+* [Creating a new working branch](#creating-a-new-working-branch)
+* [Submitting from the working branch](#submitting-code-from-the-working-branch)
+* [Update the Codebase while working on the working branch](#update-the-codebase-while-working-on-the-working-branch)
+* [Create pull request](#creating-pull-request)
+* [Synchronizing repository after pull request get merged](#synchronizing-repository-after-pull-request-get-merged)
+* [Example](#example)
+
+## Introduction
+
 There are various ways to contribute to Github projects.
 
 * You may clone the repository, make changes, and push directly to the main branch.
@@ -19,7 +32,7 @@ Some may use completely different naming conventions like `develop`, `core`, etc
 
 In this documentation, we are going to learn the third approach using fork.
 
-## Fork
+## Fork repository
 
 1. Goto Github repository you want to work on and Fork the repo by clicking on the `Fork` button. Now you should have the new forked repository under your account.
 
@@ -82,7 +95,7 @@ In this documentation, we are going to learn the third approach using fork.
 * If you want to remove some branch from the **local machine**, use `git branch -d ≪Branch Name≫`
 * If you want to force-delete some branch from the **local machine**, use `git branch -D ≪Branch Name≫`
 * If you want to remove some branch from the **remote repository**, use `git push ≪Remote≫ --delete ≪Branch Name≫`
-* If you removed some branch from the **remote repository** and want to update that fact to local machine, use `git fetch --prune`. 
+* If you removed some branch from the **remote repository** and want to update that fact to local machine, use `git fetch --prune`.
 
     You still have to run `git branch -D ≪Branch Name≫` to remove the branch completely from the local machine too.
 
@@ -292,4 +305,4 @@ Assume that your upstream repository use **master** branch as primary branch (as
     git push origin --delete some-issue
     ```
 
-1. Repeat from step 3 if you get assigned to another issue
+1. Repeat from step **3** if you get assigned to another issue

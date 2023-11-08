@@ -168,16 +168,10 @@ Sometimes, you can update the codebase while working on the working branch.
     git rebase ≪Primary Branch≫
     ```
 
-1. Pull updates from other contributor's push on the working branch
-
-    ```git
-    git pull origin ≪Working Branch≫
-    ```
-
 1. Push the changes to the remote repository
 
     ```git
-    git push origin ≪Working Branch≫
+    git push -f origin ≪Working Branch≫
     ```
 
 ## Creating Pull Request
@@ -274,8 +268,7 @@ Assume that your upstream repository uses the **master** branch as the primary b
     git push origin master
     git checkout some-issue
     git rebase master
-    git pull origin some-issue
-    git push origin some-issue
+    git push -f origin some-issue
     ```
 
 1. Make any changes to the working branch and commit
